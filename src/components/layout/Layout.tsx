@@ -8,8 +8,11 @@ interface LayoutProps {
 
 export function Layout({ children, className }: LayoutProps) {
   return (
-    <main className={cn("min-h-screen w-full bg-stone-50 text-stone-900 transition-colors duration-700", className)}>
-      <div className="mx-auto max-w-[480px] w-full min-h-screen shadow-2xl bg-white relative overflow-hidden">
+    <main className="min-h-screen w-full bg-stone-100 flex justify-center">
+      <div className={cn(
+        "w-full max-w-md bg-white h-screen shadow-2xl flex flex-col relative overflow-hidden",
+        className
+      )}>
         {children}
       </div>
     </main>

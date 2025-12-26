@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { ReactNode, ComponentProps } from 'react';
+import { motion } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
-interface SectionProps extends HTMLMotionProps<"section"> {
+interface SectionProps extends ComponentProps<typeof motion.section> {
   children: ReactNode;
   className?: string;
   delay?: number;
