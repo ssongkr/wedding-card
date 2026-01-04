@@ -3,7 +3,13 @@
 import React, { useRef, useState } from 'react';
 import { animate } from 'animejs';
 
-const Card = () => {
+interface CardProps {
+  front: React.ReactNode;
+  back: React.ReactNode;
+  className?: string;
+}
+
+const Card = ({ front, back, className = '' }: CardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
@@ -29,25 +35,17 @@ const Card = () => {
   };
 
   return (
-    <div className="perspective-1000 h-96 w-64 cursor-pointer" onClick={handleFlip}>
+    <div className={`perspective-1000 cursor-pointer ${className}`} onClick={handleFlip}>
       <div
         ref={cardRef}
         className="transform-style-3d relative h-full w-full"
         style={{ transformOrigin: 'center center' }}
       >
         {/* Front */}
-        <div className="absolute inset-0 flex h-full w-full flex-col items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 p-6 text-white shadow-xl backface-hidden">
-          <div className="mb-4 text-6xl">✨</div>
-          <h2 className="text-2xl font-bold">Front Side</h2>
-          <p className="mt-2 text-center text-blue-100">Click to flip the card</p>
-        </div>
+        <div className="absolute inset-0 h-full w-full backface-hidden">{front}</div>
 
         {/* Back */}
-        <div className="absolute inset-0 flex h-full w-full rotate-y-180 flex-col items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 p-6 text-white shadow-xl backface-hidden">
-          <div className="mb-4 text-6xl">🚀</div>
-          <h2 className="text-2xl font-bold">Back Side</h2>
-          <p className="mt-2 text-center text-purple-100">Now you see the back</p>
-        </div>
+        <div className="absolute inset-0 h-full w-full rotate-y-180 backface-hidden">{back}</div>
       </div>
     </div>
   );
