@@ -2,21 +2,22 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-// 벚꽃잎 SVG 컴포넌트 - 둥글고 위에 홈이 파인 벚꽃잎
+// 벚꽃잎 SVG 컴포넌트 - 끝이 살짝 휜 벚꽃잎
 function PetalSvg({ size, color }: { size: number; color: string }) {
   const strokeColor = color.replace(/[\d.]+\)$/, '1.0)');
 
   return (
     <svg width={size} height={size * 1.15} viewBox="0 0 24 28">
-      {/* 벚꽃잎: 위쪽이 둥글고 가운데 홈이 깊게, 아래가 뾰족 */}
+      {/* 벚꽃잎: 위쪽 홈, 아래 끝이 살짝 휨 */}
       <path
-        d="M12 27
-           Q4 20 3 12
+        d="M12 26
+           Q4 19 3 12
            Q2 5 7 1
-           Q10 -0.5 12 5
-           Q14 -0.5 17 1
+           Q10 0 12 3
+           Q14 0 17 1
            Q22 5 21 12
-           Q20 20 12 27Z"
+           Q20 19 13 25
+           Q12.5 26 11 27"
         fill={color}
         stroke={strokeColor}
         strokeWidth="0.4"
