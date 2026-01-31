@@ -11,10 +11,10 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({
-  groomName = '가람',
-  brideName = '진경',
+  groomName,
+  brideName,
   weddingDate,
-  weddingTime = '오후 2시',
+  weddingTime,
   mainImage = '/images/1.jpg',
 }: HeroSectionProps) {
   const formatWeddingDate = (dateStr: string) => {
@@ -33,9 +33,9 @@ export function HeroSection({
     <section className="flex h-svh flex-col px-6 py-12">
       <motion.p
         className="font-alex-brush text-wedding-text mb-6 text-center text-[48px] font-medium"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.4 }}
       >
         Wedding Day
       </motion.p>
@@ -43,7 +43,7 @@ export function HeroSection({
         className="mx-auto mb-10 w-full max-w-80"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
       >
         <div className="relative aspect-[1/1]">
           <div className="relative h-full w-full overflow-hidden">
@@ -53,7 +53,7 @@ export function HeroSection({
             className="pointer-events-none absolute inset-0 backdrop-blur-[2px]"
             style={{
               clipPath:
-                'polygon(0% 0%, 0% 100%, 3.75% 100%, 3.75% 2.8%, 96.25% 2.8%, 96.25% 97.2%, 3.75% 97.2%, 3.75% 100%, 100% 100%, 100% 0%)',
+                'polygon(0% 0%, 0% 100%, 3.75% 100%, 3.75% 3.75%, 96.25% 3.75%, 96.25% 96.25%, 3.75% 96.25%, 3.75% 100%, 100% 100%, 100% 0%)',
             }}
           />
           <div className="pointer-events-none absolute inset-3 border-2 border-white" />
@@ -62,9 +62,9 @@ export function HeroSection({
 
       <motion.div
         className="text-center"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.8 }}
+        transition={{ delay: 0.4, duration: 0.4 }}
       >
         <h1 className="text-wedding-text text-3xl font-[var(--font-noto-serif)] tracking-wider">
           {groomName}
@@ -76,16 +76,16 @@ export function HeroSection({
       {/* 날짜 */}
       <motion.div
         className="mt-6 text-center"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 }}
+        transition={{ delay: 0.5, duration: 0.4 }}
       >
         {dateInfo && (
           <div className="space-y-1">
-            <p className="text-wedding-text text-lg tracking-[0.1em]">
-              {dateInfo.year}. {dateInfo.month}. {dateInfo.day}
+            <p className="text-wedding-text-muted text-lg tracking-[0.1em]">
+              {dateInfo.year}년 {dateInfo.month}월 {dateInfo.day}일
             </p>
-            <p className="text-wedding-text-muted text-sm">
+            <p className="text-wedding-text-muted text-md">
               {dateInfo.weekday}요일 {weddingTime}
             </p>
           </div>
