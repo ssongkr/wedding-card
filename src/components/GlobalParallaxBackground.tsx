@@ -52,28 +52,12 @@ const petals = [
     initialRotate: 30,
   },
   {
-    top: '70vh',
-    left: '60%',
-    size: 17,
-    color: 'rgba(248, 180, 184, 0.3)',
-    rotateGroup: 3,
-    initialRotate: -35,
-  },
-  {
     top: '85vh',
     left: '25%',
     size: 21,
     color: 'rgba(255, 182, 193, 0.28)',
     rotateGroup: 1,
     initialRotate: 50,
-  },
-  {
-    top: '108vh',
-    left: '15%',
-    size: 23,
-    color: 'rgba(252, 213, 216, 0.28)',
-    rotateGroup: 3,
-    initialRotate: 40,
   },
   {
     top: '120vh',
@@ -117,7 +101,7 @@ export function GlobalParallaxBackground() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      className="pointer-events-none fixed z-0 h-lvh w-full overflow-hidden"
       style={{ perspective: '1000px' }}
     >
       {/* 물방울들 - 느리게 */}
