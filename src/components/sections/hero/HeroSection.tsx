@@ -13,26 +13,12 @@ interface HeroSectionProps {
 export function HeroSection({
   groomName,
   brideName,
-  weddingDate,
-  weddingTime,
   mainImage = '/images/1.jpg',
 }: HeroSectionProps) {
-  const formatWeddingDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
-    const weekday = weekdays[date.getDay()];
-    return { year, month, day, weekday };
-  };
-
-  const dateInfo = weddingDate ? formatWeddingDate(weddingDate) : null;
-
   return (
-    <section className="flex h-svh flex-col px-6 py-12">
+    <section className="flex h-svh flex-col px-6 pt-12">
       <motion.p
-        className="font-alex-brush text-wedding-text mb-6 text-center text-[48px] font-medium"
+        className="font-alex-brush text-wedding-text mb-6 text-center text-[44px] font-medium"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.4 }}
@@ -66,30 +52,23 @@ export function HeroSection({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.4 }}
       >
-        <h1 className="text-wedding-text text-3xl font-[var(--font-noto-serif)] tracking-wider">
+        <h1 className="text-wedding-text text-2xl font-[var(--font-noto-serif)] tracking-wider">
           {groomName}
-          <span className="text-wedding-pink mx-3 text-xl">&</span>
+          <span className="text-wedding-text mx-2 text-lg">&</span>
           {brideName}
         </h1>
       </motion.div>
 
-      {/* 날짜 */}
       <motion.div
         className="mt-6 text-center"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.4 }}
       >
-        {dateInfo && (
-          <div className="space-y-1">
-            <p className="text-wedding-text-muted text-lg tracking-[0.1em]">
-              {dateInfo.year}년 {dateInfo.month}월 {dateInfo.day}일
-            </p>
-            <p className="text-wedding-text-muted text-md">
-              {dateInfo.weekday}요일 {weddingTime}
-            </p>
-          </div>
-        )}
+        <div className="flex w-full flex-col">
+          <p className="text-wedding-pink text-center text-lg">소중한 분들을</p>
+          <p className="text-wedding-pink text-center text-lg">초대합니다.</p>
+        </div>
       </motion.div>
     </section>
   );
