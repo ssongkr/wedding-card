@@ -5,7 +5,7 @@ import { Section } from '@/components/layout/Section';
 import { type AccountInfo } from '@/types/wedding';
 import { useState } from 'react';
 
-interface WinterSectionProps {
+interface AccountSectionProps {
   groomAccounts?: AccountInfo[];
   brideAccounts?: AccountInfo[];
   groomName?: string;
@@ -66,12 +66,12 @@ function AccountCard({
   );
 }
 
-export function WinterSection({
+export function AccountSection({
   groomAccounts = [],
   brideAccounts = [],
   groomName = '신랑',
   brideName = '신부',
-}: WinterSectionProps) {
+}: AccountSectionProps) {
   const [activeTab, setActiveTab] = useState<'groom' | 'bride'>('groom');
 
   const handleShare = async () => {
@@ -98,7 +98,7 @@ export function WinterSection({
   const hasAccounts = groomAccounts.length > 0 || brideAccounts.length > 0;
 
   return (
-    <Section id="winter" className="flex items-center justify-center">
+    <Section id="account" className="flex items-center justify-center">
       <div className="w-full max-w-md mx-auto">
         <motion.h2
           className="font-[var(--font-noto-serif)] text-2xl text-center text-wedding-text mb-10"

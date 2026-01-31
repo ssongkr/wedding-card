@@ -1,9 +1,9 @@
 'use client';
 
-import { SpringSection } from '@/components/sections/spring/SpringSection';
-import { SummerSection } from '@/components/sections/summer/SummerSection';
-import { AutumnSection } from '@/components/sections/autumn/AutumnSection';
-import { WinterSection } from '@/components/sections/winter/WinterSection';
+import { HeroSection } from '@/components/sections/hero/HeroSection';
+import { VenueSection } from '@/components/sections/venue/VenueSection';
+import { GallerySection } from '@/components/sections/gallery/GallerySection';
+import { AccountSection } from '@/components/sections/account/AccountSection';
 import { GlobalParallaxBackground } from '@/components/GlobalParallaxBackground';
 import { weddingInfo, transportInfo } from '@/constants/weddingData';
 
@@ -25,8 +25,8 @@ export default function Home() {
 
       {/* 콘텐츠 */}
       <div className="relative z-10">
-        {/* 봄 - 메인 */}
-        <SpringSection
+        {/* 메인 표지 */}
+        <HeroSection
           groomName={weddingInfo.groom.name}
           brideName={weddingInfo.bride.name}
           weddingDate={weddingInfo.date}
@@ -34,8 +34,8 @@ export default function Home() {
           mainImage="/images/1.jpg"
         />
 
-        {/* 여름 - 예식 정보 */}
-        <SummerSection
+        {/* 예식 안내 */}
+        <VenueSection
           date={formatDate(weddingInfo.date)}
           time={weddingInfo.time}
           venueName={weddingInfo.venue.name}
@@ -46,15 +46,15 @@ export default function Home() {
           transport={transportInfo}
         />
 
-        {/* 가을 - 갤러리 */}
-        <AutumnSection
+        {/* 갤러리 */}
+        <GallerySection
           images={weddingInfo.gallery}
           groomName={weddingInfo.groom.name}
           brideName={weddingInfo.bride.name}
         />
 
-        {/* 겨울 - 계좌 정보 */}
-        <WinterSection
+        {/* 마음 전하기 */}
+        <AccountSection
           groomAccounts={weddingInfo.accounts?.groom}
           brideAccounts={weddingInfo.accounts?.bride}
           groomName={weddingInfo.groom.name}

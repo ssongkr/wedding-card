@@ -4,17 +4,17 @@ import { motion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
 import { useState } from 'react';
 
-interface AutumnSectionProps {
+interface GallerySectionProps {
   images?: string[];
   groomName?: string;
   brideName?: string;
 }
 
-export function AutumnSection({
+export function GallerySection({
   images = [],
   groomName = '신랑',
   brideName = '신부',
-}: AutumnSectionProps) {
+}: GallerySectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextImage = () => {
@@ -30,7 +30,7 @@ export function AutumnSection({
   };
 
   return (
-    <Section id="autumn" className="flex items-center justify-center">
+    <Section id="gallery" className="flex items-center justify-center">
       <div className="w-full max-w-md mx-auto">
         <motion.h2
           className="font-[var(--font-noto-serif)] text-2xl text-center text-wedding-text mb-10"

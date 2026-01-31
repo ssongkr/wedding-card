@@ -37,36 +37,28 @@ export function FilmFrame({ children, frameNumber, className = '' }: FilmFramePr
   const y = useTransform(scrollYProgress, [0, 1], ['5%', '-5%']);
 
   return (
-    <motion.div
-      ref={ref}
-      className={`relative min-h-screen bg-film-bg ${className}`}
-      style={{ y }}
-    >
+    <motion.div ref={ref} className={`bg-film-bg relative ${className}`} style={{ y }}>
       {/* Sprocket holes */}
       <SprocketHoles count={10} />
 
       {/* Film frame border */}
-      <div className="absolute inset-x-8 inset-y-4 film-border" />
+      <div className="film-border absolute inset-x-8 inset-y-4" />
 
       {/* Frame number (like film edge marking) */}
       {frameNumber && (
         <div className="absolute top-6 left-12 z-20">
-          <span className="font-mono text-xs text-film-sepia/60 tracking-wider">
-            {frameNumber}
-          </span>
+          <span className="text-film-sepia/60 font-mono text-xs tracking-wider">{frameNumber}</span>
         </div>
       )}
 
       {/* Content area */}
-      <div className="relative z-10 min-h-screen px-12 py-8">
-        {children}
-      </div>
+      <div className="relative z-10 px-12 py-8">{children}</div>
 
       {/* Film grain overlay */}
-      <div className="film-grain absolute inset-0 pointer-events-none" />
+      <div className="film-grain pointer-events-none absolute inset-0" />
 
       {/* Vignette effect */}
-      <div className="vignette absolute inset-0 pointer-events-none" />
+      <div className="vignette pointer-events-none absolute inset-0" />
 
       {/* Random film scratches */}
       <div className="film-scratch" style={{ left: '15%' }} />
