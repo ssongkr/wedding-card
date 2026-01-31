@@ -45,15 +45,15 @@ const petals = [
   },
   {
     top: '55vh',
-    left: '8%',
+    left: '10%',
     size: 24,
     color: 'rgba(252, 213, 216, 0.25)',
     rotateGroup: 2,
     initialRotate: 30,
   },
   {
-    top: '85vh',
-    left: '25%',
+    top: '105vh',
+    left: '7%',
     size: 21,
     color: 'rgba(255, 182, 193, 0.28)',
     rotateGroup: 1,
