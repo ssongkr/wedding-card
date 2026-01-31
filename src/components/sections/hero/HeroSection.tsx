@@ -11,8 +11,8 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({
-  groomName = '신랑',
-  brideName = '신부',
+  groomName = '가람',
+  brideName = '진경',
   weddingDate,
   weddingTime = '오후 2시',
   mainImage = '/images/1.jpg',
@@ -30,29 +30,25 @@ export function HeroSection({
   const dateInfo = weddingDate ? formatWeddingDate(weddingDate) : null;
 
   return (
-    <section id="hero" className="flex h-dvh flex-col justify-center px-6 py-12">
-      {/* 상단 타이틀 */}
+    <section className="flex h-svh flex-col px-6 py-12">
       <motion.p
-        className="text-wedding-pink font-alex-brush mb-8 text-center text-4xl"
+        className="font-alex-brush text-wedding-text mb-6 text-center text-[48px] font-medium"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
         Wedding Day
       </motion.p>
-
-      {/* 메인 이미지 - 심플 액자 */}
       <motion.div
-        className="mx-auto w-full max-w-80"
+        className="mx-auto mb-10 w-full max-w-80"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.8 }}
       >
-        <div className="relative aspect-[3/4]">
+        <div className="relative aspect-[1/1]">
           <div className="relative h-full w-full overflow-hidden">
             <img src={mainImage} alt="Wedding" className="h-full w-full object-cover" />
           </div>
-          {/* 테두리 바깥 블러 효과 */}
           <div
             className="pointer-events-none absolute inset-0 backdrop-blur-[2px]"
             style={{
@@ -64,9 +60,8 @@ export function HeroSection({
         </div>
       </motion.div>
 
-      {/* 이름 */}
       <motion.div
-        className="mt-10 text-center"
+        className="text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8, duration: 0.8 }}

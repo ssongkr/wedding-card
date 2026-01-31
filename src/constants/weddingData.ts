@@ -3,14 +3,14 @@ import { type WeddingInfo } from '@/types/wedding';
 // 샘플 데이터 - 실제 정보로 교체해주세요
 export const weddingInfo: WeddingInfo = {
   groom: {
-    name: '신랑',
-    phone: '010-1234-5678',
+    name: '송가람',
+    phone: '010-5343-3642',
     father: '아버지',
     mother: '어머니',
   },
   bride: {
-    name: '신부',
-    phone: '010-8765-4321',
+    name: '김진경',
+    phone: '010-3125-7231',
     father: '아버지',
     mother: '어머니',
   },
