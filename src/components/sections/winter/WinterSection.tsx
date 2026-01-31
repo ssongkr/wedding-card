@@ -2,10 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
-import { GlassCard } from '@/components/glass/GlassCard';
-import { GlassButton } from '@/components/glass/GlassButton';
-import { WinterBackground } from './WinterBackground';
-import { ParallaxContainer } from '@/components/layout/ParallaxContainer';
 import { type AccountInfo } from '@/types/wedding';
 import { useState } from 'react';
 
@@ -15,15 +11,6 @@ interface WinterSectionProps {
   groomName?: string;
   brideName?: string;
 }
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' as const },
-  },
-};
 
 function AccountCard({
   accounts,
@@ -48,25 +35,28 @@ function AccountCard({
 
   return (
     <div className="space-y-3">
-      <h4 className="text-winter-text/70 text-sm text-center">{title}</h4>
+      <h4 className="text-wedding-text-muted text-sm text-center">{title}</h4>
       {accounts.map((account, idx) => (
         <motion.div
           key={idx}
-          className="flex items-center justify-between p-3 rounded-xl bg-white/30 backdrop-blur-sm"
-          variants={itemVariants}
+          className="flex items-center justify-between p-4 rounded-xl bg-white/70"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: idx * 0.1 }}
         >
           <div className="text-sm">
-            <p className="text-winter-text/60 text-xs">
+            <p className="text-wedding-text-muted text-xs">
               {account.bank} · {account.holder}
               {account.relation && ` (${account.relation})`}
             </p>
-            <p className="text-winter-text font-medium mt-0.5">
+            <p className="text-wedding-text font-medium mt-1">
               {account.accountNumber}
             </p>
           </div>
           <button
             onClick={() => handleCopy(account, idx)}
-            className="ml-3 px-3 py-1.5 text-xs rounded-lg bg-winter-primary/20 text-winter-text/80 hover:bg-winter-primary/30 transition-colors touch-target"
+            className="ml-3 px-4 py-2 text-xs rounded-full bg-wedding-pink/20 text-wedding-text hover:bg-wedding-pink/30 transition-colors"
           >
             {copiedIndex === idx ? '복사됨!' : '복사'}
           </button>
@@ -93,7 +83,7 @@ export function WinterSection({
           url: window.location.href,
         });
       } catch {
-        // User cancelled or share failed
+        // User cancelled
       }
     } else {
       try {
@@ -108,49 +98,54 @@ export function WinterSection({
   const hasAccounts = groomAccounts.length > 0 || brideAccounts.length > 0;
 
   return (
-    <Section season="winter" id="winter" className="flex items-center justify-center">
-      <WinterBackground />
-
-      <div className="relative z-10 w-full max-w-md mx-auto px-6 py-16">
-        <ParallaxContainer speed={0.15}>
-          <motion.h2
-            className="font-[var(--font-noto-serif)] text-2xl text-center text-winter-text mb-8"
-            variants={itemVariants}
-          >
-            마음 전하실 곳
-          </motion.h2>
-        </ParallaxContainer>
+    <Section id="winter" className="flex items-center justify-center">
+      <div className="w-full max-w-md mx-auto">
+        <motion.h2
+          className="font-[var(--font-noto-serif)] text-2xl text-center text-wedding-text mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          마음 전하실 곳
+        </motion.h2>
 
         {hasAccounts && (
-          <GlassCard season="winter" delay={0.1}>
-            {/* Tab buttons */}
+          <motion.div
+            className="soft-card"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            {/* 탭 버튼 */}
             <div className="flex gap-2 mb-6">
               <button
                 onClick={() => setActiveTab('groom')}
-                className={`flex-1 py-2 text-sm rounded-xl transition-all ${
+                className={`flex-1 py-2.5 text-sm rounded-full transition-all ${
                   activeTab === 'groom'
-                    ? 'bg-winter-primary/30 text-winter-text font-medium'
-                    : 'text-winter-text/50 hover:text-winter-text/70'
+                    ? 'bg-wedding-pink/30 text-wedding-text font-medium'
+                    : 'text-wedding-text-muted hover:text-wedding-text'
                 }`}
               >
                 신랑측
               </button>
               <button
                 onClick={() => setActiveTab('bride')}
-                className={`flex-1 py-2 text-sm rounded-xl transition-all ${
+                className={`flex-1 py-2.5 text-sm rounded-full transition-all ${
                   activeTab === 'bride'
-                    ? 'bg-winter-primary/30 text-winter-text font-medium'
-                    : 'text-winter-text/50 hover:text-winter-text/70'
+                    ? 'bg-wedding-pink/30 text-wedding-text font-medium'
+                    : 'text-wedding-text-muted hover:text-wedding-text'
                 }`}
               >
                 신부측
               </button>
             </div>
 
-            {/* Account lists */}
+            {/* 계좌 목록 */}
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, x: activeTab === 'groom' ? -20 : 20 }}
+              initial={{ opacity: 0, x: activeTab === 'groom' ? -10 : 10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.2 }}
             >
@@ -166,22 +161,18 @@ export function WinterSection({
                 />
               )}
             </motion.div>
-          </GlassCard>
+          </motion.div>
         )}
 
-        {/* Share button */}
+        {/* 공유 버튼 */}
         <motion.div
           className="mt-8 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.2 }}
         >
-          <GlassButton
-            season="winter"
-            onClick={handleShare}
-            className="text-winter-text"
-          >
+          <button onClick={handleShare} className="soft-button">
             <span className="flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -193,19 +184,19 @@ export function WinterSection({
               </svg>
               청첩장 공유하기
             </span>
-          </GlassButton>
+          </button>
         </motion.div>
 
-        {/* Footer */}
+        {/* 푸터 */}
         <motion.footer
-          className="mt-16 text-center text-winter-text/40 text-xs"
+          className="mt-20 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.4 }}
         >
-          <p className="mb-2">Thank you for celebrating with us</p>
-          <p>
+          <p className="text-wedding-pink text-xs tracking-widest mb-2">THANK YOU</p>
+          <p className="font-[var(--font-noto-serif)] text-wedding-text-muted">
             {groomName} & {brideName}
           </p>
         </motion.footer>

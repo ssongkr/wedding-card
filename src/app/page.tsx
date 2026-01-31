@@ -4,6 +4,7 @@ import { SpringSection } from '@/components/sections/spring/SpringSection';
 import { SummerSection } from '@/components/sections/summer/SummerSection';
 import { AutumnSection } from '@/components/sections/autumn/AutumnSection';
 import { WinterSection } from '@/components/sections/winter/WinterSection';
+import { GlobalParallaxBackground } from '@/components/GlobalParallaxBackground';
 import { weddingInfo, transportInfo } from '@/constants/weddingData';
 
 export default function Home() {
@@ -19,41 +20,47 @@ export default function Home() {
 
   return (
     <main className="relative">
+      {/* 전체 페이지 패럴랙스 배경 */}
+      <GlobalParallaxBackground />
 
-      {/* 봄 - 인사말 */}
-      <SpringSection
-        groomName={weddingInfo.groom.name}
-        brideName={weddingInfo.bride.name}
-        message={weddingInfo.message}
-        weddingDate={weddingInfo.date}
-      />
+      {/* 콘텐츠 */}
+      <div className="relative z-10">
+        {/* 봄 - 메인 */}
+        <SpringSection
+          groomName={weddingInfo.groom.name}
+          brideName={weddingInfo.bride.name}
+          weddingDate={weddingInfo.date}
+          weddingTime={weddingInfo.time}
+          mainImage="/images/1.jpg"
+        />
 
-      {/* 여름 - 예식 정보 */}
-      <SummerSection
-        date={formatDate(weddingInfo.date)}
-        time={weddingInfo.time}
-        venueName={weddingInfo.venue.name}
-        venueHall={weddingInfo.venue.hall}
-        venueAddress={weddingInfo.venue.address}
-        venuePhone={weddingInfo.venue.phone}
-        mapUrl={weddingInfo.venue.mapUrl}
-        transport={transportInfo}
-      />
+        {/* 여름 - 예식 정보 */}
+        <SummerSection
+          date={formatDate(weddingInfo.date)}
+          time={weddingInfo.time}
+          venueName={weddingInfo.venue.name}
+          venueHall={weddingInfo.venue.hall}
+          venueAddress={weddingInfo.venue.address}
+          venuePhone={weddingInfo.venue.phone}
+          mapUrl={weddingInfo.venue.mapUrl}
+          transport={transportInfo}
+        />
 
-      {/* 가을 - 갤러리 */}
-      <AutumnSection
-        images={weddingInfo.gallery}
-        groomName={weddingInfo.groom.name}
-        brideName={weddingInfo.bride.name}
-      />
+        {/* 가을 - 갤러리 */}
+        <AutumnSection
+          images={weddingInfo.gallery}
+          groomName={weddingInfo.groom.name}
+          brideName={weddingInfo.bride.name}
+        />
 
-      {/* 겨울 - 계좌 정보 */}
-      <WinterSection
-        groomAccounts={weddingInfo.accounts?.groom}
-        brideAccounts={weddingInfo.accounts?.bride}
-        groomName={weddingInfo.groom.name}
-        brideName={weddingInfo.bride.name}
-      />
+        {/* 겨울 - 계좌 정보 */}
+        <WinterSection
+          groomAccounts={weddingInfo.accounts?.groom}
+          brideAccounts={weddingInfo.accounts?.bride}
+          groomName={weddingInfo.groom.name}
+          brideName={weddingInfo.bride.name}
+        />
+      </div>
     </main>
   );
 }

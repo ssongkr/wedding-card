@@ -1,36 +1,18 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdf8f5;
+  --foreground: #5c4a3d;
 
-  /* Spring Colors */
-  --spring-primary: #FFB7C5;
-  --spring-secondary: #98D8AA;
-  --spring-accent: #FFF5E4;
-  --spring-bg: #FDF6F0;
-  --spring-text: #5D4E37;
-
-  /* Summer Colors */
-  --summer-primary: #87CEEB;
-  --summer-secondary: #00CED1;
-  --summer-accent: #E0F7FA;
-  --summer-bg: #F0FFFF;
-  --summer-text: #2C4A52;
-
-  /* Autumn Colors */
-  --autumn-primary: #D2691E;
-  --autumn-secondary: #DAA520;
-  --autumn-accent: #FFF8DC;
-  --autumn-bg: #FAF3E0;
-  --autumn-text: #4A3728;
-
-  /* Winter Colors */
-  --winter-primary: #B0C4DE;
-  --winter-secondary: #E6E6FA;
-  --winter-accent: #F8F8FF;
-  --winter-bg: #FAFAFA;
-  --winter-text: #2F4F4F;
+  /* Romantic Wedding Colors */
+  --wedding-bg: #fdf8f5;
+  --wedding-pink: #e8b4b8;
+  --wedding-blush: #f5d6d6;
+  --wedding-cream: #fff9f5;
+  --wedding-gold: #c9a86c;
+  --wedding-brown: #8b7355;
+  --wedding-text: #5c4a3d;
+  --wedding-text-muted: #9a8578;
 }
 
 @theme inline {
@@ -39,33 +21,15 @@
   --font-sans: var(--font-noto-sans);
   --font-serif: var(--font-noto-serif);
 
-  /* Spring */
-  --color-spring-primary: var(--spring-primary);
-  --color-spring-secondary: var(--spring-secondary);
-  --color-spring-accent: var(--spring-accent);
-  --color-spring-bg: var(--spring-bg);
-  --color-spring-text: var(--spring-text);
-
-  /* Summer */
-  --color-summer-primary: var(--summer-primary);
-  --color-summer-secondary: var(--summer-secondary);
-  --color-summer-accent: var(--summer-accent);
-  --color-summer-bg: var(--summer-bg);
-  --color-summer-text: var(--summer-text);
-
-  /* Autumn */
-  --color-autumn-primary: var(--autumn-primary);
-  --color-autumn-secondary: var(--autumn-secondary);
-  --color-autumn-accent: var(--autumn-accent);
-  --color-autumn-bg: var(--autumn-bg);
-  --color-autumn-text: var(--autumn-text);
-
-  /* Winter */
-  --color-winter-primary: var(--winter-primary);
-  --color-winter-secondary: var(--winter-secondary);
-  --color-winter-accent: var(--winter-accent);
-  --color-winter-bg: var(--winter-bg);
-  --color-winter-text: var(--winter-text);
+  /* Wedding Theme */
+  --color-wedding-bg: var(--wedding-bg);
+  --color-wedding-pink: var(--wedding-pink);
+  --color-wedding-blush: var(--wedding-blush);
+  --color-wedding-cream: var(--wedding-cream);
+  --color-wedding-gold: var(--wedding-gold);
+  --color-wedding-brown: var(--wedding-brown);
+  --color-wedding-text: var(--wedding-text);
+  --color-wedding-text-muted: var(--wedding-text-muted);
 }
 
 html {
@@ -73,100 +37,50 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #ffffff;
+  color: var(--wedding-text);
   font-family: var(--font-noto-sans), Arial, sans-serif;
   overflow-x: hidden;
 }
 
-/* Liquid Glass Effect */
-.liquid-glass {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.4) 0%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 24px;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-  position: relative;
-  overflow: hidden;
+/* Soft Card Style */
+.soft-card {
+  background: #ffffff;
+  border: 1px solid rgba(232, 180, 184, 0.3);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-.liquid-glass::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
+/* Soft Button */
+.soft-button {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.3) 0%,
-    transparent 100%
+    rgba(232, 180, 184, 0.2) 0%,
+    rgba(245, 214, 214, 0.3) 100%
   );
-  border-radius: 24px 24px 0 0;
-  pointer-events: none;
-}
-
-/* Season-specific Glass Variants */
-.liquid-glass-spring {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 183, 197, 0.25) 0%,
-    rgba(255, 245, 228, 0.15) 100%
-  );
-  border-color: rgba(255, 183, 197, 0.35);
-}
-
-.liquid-glass-summer {
-  background: linear-gradient(
-    135deg,
-    rgba(135, 206, 235, 0.25) 0%,
-    rgba(224, 247, 250, 0.15) 100%
-  );
-  border-color: rgba(135, 206, 235, 0.35);
-}
-
-.liquid-glass-autumn {
-  background: linear-gradient(
-    135deg,
-    rgba(218, 165, 32, 0.2) 0%,
-    rgba(255, 248, 220, 0.15) 100%
-  );
-  border-color: rgba(218, 165, 32, 0.3);
-}
-
-.liquid-glass-winter {
-  background: linear-gradient(
-    135deg,
-    rgba(230, 230, 250, 0.35) 0%,
-    rgba(248, 248, 255, 0.25) 100%
-  );
-  border-color: rgba(176, 196, 222, 0.35);
-}
-
-/* Interactive Glass */
-.liquid-glass-interactive {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(232, 180, 184, 0.5);
+  border-radius: 24px;
+  color: var(--wedding-text);
+  padding: 12px 28px;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.liquid-glass-interactive:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+.soft-button:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(232, 180, 184, 0.3) 0%,
+    rgba(245, 214, 214, 0.4) 100%
+  );
+  border-color: rgba(232, 180, 184, 0.7);
+  transform: translateY(-1px);
 }
 
-.liquid-glass-interactive:active {
-  transform: translateY(0);
+.soft-button:active {
+  transform: scale(0.98);
 }
 
 /* Touch Optimization */
@@ -190,7 +104,7 @@ body {
   }
 }
 
-/* Hide scrollbar but keep functionality */
+/* Hide scrollbar */
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -198,4 +112,20 @@ body {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Floral Pattern Background */
+.floral-bg {
+  background-color: #ffffff;
+}
+
+/* Soft gradient overlay for images */
+.image-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
 }

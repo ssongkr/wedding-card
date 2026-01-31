@@ -29,9 +29,13 @@ export const weddingInfo: WeddingInfo = {
 귀한 걸음 하시어 축복해 주시면
 더없는 기쁨으로 간직하겠습니다.`,
   gallery: [
-    // 갤러리 이미지 URL들을 여기에 추가하세요
-    // '/images/photo1.jpg',
-    // '/images/photo2.jpg',
+    '/images/2.jpg',
+    '/images/3.jpg',
+    '/images/4.jpg',
+    '/images/5.jpg',
+    '/images/6.jpg',
+    '/images/7.jpg',
+    '/images/8.jpg',
   ],
   accounts: {
     groom: [

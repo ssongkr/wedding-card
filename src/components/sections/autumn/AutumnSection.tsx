@@ -2,9 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
-import { GlassCard } from '@/components/glass/GlassCard';
-import { AutumnBackground } from './AutumnBackground';
-import { ParallaxContainer } from '@/components/layout/ParallaxContainer';
 import { useState } from 'react';
 
 interface AutumnSectionProps {
@@ -12,15 +9,6 @@ interface AutumnSectionProps {
   groomName?: string;
   brideName?: string;
 }
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' as const },
-  },
-};
 
 export function AutumnSection({
   images = [],
@@ -42,21 +30,26 @@ export function AutumnSection({
   };
 
   return (
-    <Section season="autumn" id="autumn" className="flex items-center justify-center">
-      <AutumnBackground />
-
-      <div className="relative z-10 w-full max-w-md mx-auto px-6 py-16">
-        <ParallaxContainer speed={0.15}>
-          <motion.h2
-            className="font-[var(--font-noto-serif)] text-2xl text-center text-autumn-text mb-8"
-            variants={itemVariants}
-          >
-            우리의 이야기
-          </motion.h2>
-        </ParallaxContainer>
+    <Section id="autumn" className="flex items-center justify-center">
+      <div className="w-full max-w-md mx-auto">
+        <motion.h2
+          className="font-[var(--font-noto-serif)] text-2xl text-center text-wedding-text mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          우리의 이야기
+        </motion.h2>
 
         {images.length > 0 ? (
-          <GlassCard season="autumn" className="p-0 overflow-hidden" delay={0.1}>
+          <motion.div
+            className="soft-card p-0 overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
             <div className="relative aspect-[4/5]">
               <motion.img
                 key={currentIndex}
@@ -68,12 +61,12 @@ export function AutumnSection({
                 transition={{ duration: 0.3 }}
               />
 
-              {/* Navigation arrows */}
+              {/* 네비게이션 */}
               {images.length > 1 && (
                 <>
                   <button
                     onClick={prevImage}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-autumn-text/70 hover:bg-white/50 transition-colors"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-wedding-text hover:bg-white transition-colors shadow-sm"
                     aria-label="이전 사진"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,7 +75,7 @@ export function AutumnSection({
                   </button>
                   <button
                     onClick={nextImage}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-autumn-text/70 hover:bg-white/50 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-wedding-text hover:bg-white transition-colors shadow-sm"
                     aria-label="다음 사진"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,29 +85,35 @@ export function AutumnSection({
                 </>
               )}
 
-              {/* Dots indicator */}
+              {/* 페이지 인디케이터 */}
               {images.length > 1 && (
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                   {images.map((_, idx) => (
                     <button
                       key={idx}
                       onClick={() => setCurrentIndex(idx)}
-                      className={`w-2 h-2 rounded-full transition-colors ${
+                      className={`w-2 h-2 rounded-full transition-all ${
                         idx === currentIndex
-                          ? 'bg-white'
-                          : 'bg-white/40'
+                          ? 'bg-white w-4'
+                          : 'bg-white/50'
                       }`}
-                      aria-label={`${idx + 1}번 사진으로 이동`}
+                      aria-label={`${idx + 1}번 사진`}
                     />
                   ))}
                 </div>
               )}
             </div>
-          </GlassCard>
+          </motion.div>
         ) : (
-          <GlassCard season="autumn" delay={0.1}>
+          <motion.div
+            className="soft-card"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
             <div className="aspect-[4/5] flex items-center justify-center">
-              <div className="text-center text-autumn-text/50">
+              <div className="text-center text-wedding-text-muted">
                 <svg
                   className="w-16 h-16 mx-auto mb-4 opacity-50"
                   fill="none"
@@ -131,23 +130,18 @@ export function AutumnSection({
                 <p className="text-sm">사진을 추가해주세요</p>
               </div>
             </div>
-          </GlassCard>
+          </motion.div>
         )}
 
-        <motion.div
-          className="mt-8 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        <motion.p
+          className="mt-8 text-center text-wedding-text-muted text-sm"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.3 }}
         >
-          <GlassCard season="autumn" className="inline-block">
-            <p className="text-autumn-text/70 text-sm leading-relaxed">
-              {groomName}과 {brideName}의<br />
-              아름다운 순간들
-            </p>
-          </GlassCard>
-        </motion.div>
+          {groomName}과 {brideName}의 아름다운 순간들
+        </motion.p>
       </div>
     </Section>
   );

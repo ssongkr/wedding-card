@@ -1,95 +1,103 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Section } from '@/components/layout/Section';
-import { GlassCard } from '@/components/glass/GlassCard';
-import { SpringBackground } from './SpringBackground';
-import { ParallaxContainer } from '@/components/layout/ParallaxContainer';
 
 interface SpringSectionProps {
   groomName?: string;
   brideName?: string;
-  message?: string;
   weddingDate?: string;
+  weddingTime?: string;
+  mainImage?: string;
 }
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' as const },
-  },
-};
 
 export function SpringSection({
   groomName = '신랑',
   brideName = '신부',
-  message = '서로 다른 길을 걸어온 두 사람이\n이제 하나의 길을 함께 걸어가려 합니다.\n\n귀한 걸음 하시어 축복해 주시면\n더없는 기쁨으로 간직하겠습니다.',
   weddingDate,
+  weddingTime = '오후 2시',
+  mainImage = '/images/1.jpg',
 }: SpringSectionProps) {
-  const daysUntilWedding = weddingDate
-    ? Math.ceil((new Date(weddingDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
-    : null;
+  const formatWeddingDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+    const weekday = weekdays[date.getDay()];
+    return { year, month, day, weekday };
+  };
+
+  const dateInfo = weddingDate ? formatWeddingDate(weddingDate) : null;
 
   return (
-    <Section season="spring" id="spring" className="flex items-center justify-center">
-      <SpringBackground />
+    <section id="spring" className="min-h-screen px-6 py-12 flex flex-col">
+      {/* 상단 타이틀 */}
+      <motion.p
+        className="text-center text-wedding-pink text-xs tracking-[0.3em] font-light mb-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        WEDDING INVITATION
+      </motion.p>
 
-      <div className="relative z-10 w-full max-w-md mx-auto px-6 py-16">
-        <ParallaxContainer speed={0.2} direction="down">
-          <motion.div variants={itemVariants} className="text-center mb-8">
-            <motion.p
-              className="text-spring-text/60 text-sm tracking-[0.3em] mb-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              WEDDING INVITATION
-            </motion.p>
-          </motion.div>
-        </ParallaxContainer>
-
-        <GlassCard season="spring" className="text-center" delay={0.2}>
-          <motion.h1
-            className="font-[var(--font-noto-serif)] text-3xl font-medium text-spring-text mb-2"
-            variants={itemVariants}
-          >
-            {groomName}
-            <span className="text-spring-primary mx-3 text-2xl">&#10084;</span>
-            {brideName}
-          </motion.h1>
-
-          <motion.div
-            className="w-16 h-px bg-spring-primary/50 mx-auto my-6"
-            variants={itemVariants}
+      {/* 메인 이미지 */}
+      <motion.div
+        className="flex-1 max-w-md mx-auto w-full"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.8 }}
+      >
+        <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg">
+          <img
+            src={mainImage}
+            alt="Wedding"
+            className="w-full h-full object-cover"
           />
+        </div>
+      </motion.div>
 
-          <motion.p
-            className="font-[var(--font-noto-sans)] text-spring-text/80 leading-relaxed text-[15px] whitespace-pre-line"
-            variants={itemVariants}
-          >
-            {message}
-          </motion.p>
-        </GlassCard>
+      {/* 이름 */}
+      <motion.div
+        className="text-center mt-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.8 }}
+      >
+        <h1 className="font-[var(--font-noto-serif)] text-3xl text-wedding-text tracking-wider">
+          {groomName}
+          <span className="mx-3 text-xl text-wedding-pink">&</span>
+          {brideName}
+        </h1>
+      </motion.div>
 
-        {daysUntilWedding !== null && daysUntilWedding > 0 && (
-          <motion.div
-            className="mt-8 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-          >
-            <GlassCard season="spring" className="inline-block px-8 py-4">
-              <p className="text-spring-text/60 text-xs mb-1">결혼식까지</p>
-              <p className="text-spring-primary text-2xl font-medium">
-                D-{daysUntilWedding}
-              </p>
-            </GlassCard>
-          </motion.div>
+      {/* 날짜 */}
+      <motion.div
+        className="text-center mt-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1 }}
+      >
+        {dateInfo && (
+          <div className="space-y-1">
+            <p className="text-lg text-wedding-text tracking-[0.1em]">
+              {dateInfo.year}. {dateInfo.month}. {dateInfo.day}
+            </p>
+            <p className="text-sm text-wedding-text-muted">
+              {dateInfo.weekday}요일 {weddingTime}
+            </p>
+          </div>
         )}
-      </div>
-    </Section>
+
+        {/* 스크롤 안내 */}
+        <motion.div
+          className="mt-10"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <div className="w-px h-8 bg-gradient-to-b from-wedding-pink/60 to-transparent mx-auto" />
+        </motion.div>
+      </motion.div>
+    </section>
   );
 }

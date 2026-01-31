@@ -2,10 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
-import { GlassCard } from '@/components/glass/GlassCard';
-import { GlassButton } from '@/components/glass/GlassButton';
-import { SummerBackground } from './SummerBackground';
-import { ParallaxContainer } from '@/components/layout/ParallaxContainer';
 
 interface SummerSectionProps {
   date?: string;
@@ -21,15 +17,6 @@ interface SummerSectionProps {
     car?: string;
   };
 }
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' as const },
-  },
-};
 
 export function SummerSection({
   date = '2025년 5월 10일',
@@ -57,103 +44,106 @@ export function SummerSection({
   };
 
   return (
-    <Section season="summer" id="summer" className="flex items-center justify-center">
-      <SummerBackground />
+    <Section id="summer" className="flex items-center justify-center">
+      <div className="w-full max-w-md mx-auto">
+        <motion.h2
+          className="font-[var(--font-noto-serif)] text-2xl text-center text-wedding-text mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          예식 안내
+        </motion.h2>
 
-      <div className="relative z-10 w-full max-w-md mx-auto px-6 py-16">
-        <ParallaxContainer speed={0.15}>
-          <motion.h2
-            className="font-[var(--font-noto-serif)] text-2xl text-center text-summer-text mb-8"
-            variants={itemVariants}
-          >
-            예식 안내
-          </motion.h2>
-        </ParallaxContainer>
-
-        <GlassCard season="summer" className="mb-6" delay={0.1}>
+        {/* 예식 정보 카드 */}
+        <motion.div
+          className="soft-card mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+        >
           <div className="text-center space-y-4">
-            <motion.div variants={itemVariants}>
-              <p className="text-summer-primary font-medium text-lg">{date}</p>
-              <p className="text-summer-text/80">{time}</p>
-            </motion.div>
+            <div>
+              <p className="text-wedding-pink font-medium text-lg">{date}</p>
+              <p className="text-wedding-text-muted">{time}</p>
+            </div>
 
-            <motion.div
-              className="w-full h-px bg-summer-primary/30"
-              variants={itemVariants}
-            />
+            <div className="w-12 h-px bg-wedding-pink/40 mx-auto" />
 
-            <motion.div variants={itemVariants}>
-              <p className="font-medium text-summer-text text-lg">{venueName}</p>
+            <div>
+              <p className="font-medium text-wedding-text text-lg">{venueName}</p>
               {venueHall && (
-                <p className="text-summer-text/70 text-sm">{venueHall}</p>
+                <p className="text-wedding-text-muted text-sm">{venueHall}</p>
               )}
-              <p className="text-summer-text/70 text-sm mt-1">{venueAddress}</p>
+              <p className="text-wedding-text-muted text-sm mt-1">{venueAddress}</p>
               {venuePhone && (
-                <p className="text-summer-text/50 text-xs mt-1">
+                <p className="text-wedding-gold text-xs mt-2">
                   Tel. {venuePhone}
                 </p>
               )}
-            </motion.div>
+            </div>
           </div>
-        </GlassCard>
+        </motion.div>
 
+        {/* 버튼들 */}
         <motion.div
           className="flex gap-3 justify-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.2 }}
         >
           {mapUrl && (
-            <GlassButton
-              season="summer"
-              onClick={handleOpenMap}
-              className="text-sm text-summer-text"
-            >
+            <button onClick={handleOpenMap} className="soft-button">
               지도 보기
-            </GlassButton>
+            </button>
           )}
-          <GlassButton
-            season="summer"
-            onClick={handleCopyAddress}
-            className="text-sm text-summer-text"
-          >
+          <button onClick={handleCopyAddress} className="soft-button">
             주소 복사
-          </GlassButton>
+          </button>
         </motion.div>
 
+        {/* 교통 안내 */}
         {transport && (
-          <GlassCard season="summer" className="mt-6" delay={0.4}>
-            <h3 className="font-medium text-summer-text mb-4 text-center">
+          <motion.div
+            className="soft-card mt-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <h3 className="font-medium text-wedding-text mb-4 text-center text-sm">
               오시는 길
             </h3>
             <div className="space-y-3 text-sm">
               {transport.subway && (
-                <motion.div variants={itemVariants} className="flex gap-3">
-                  <span className="text-summer-primary font-medium min-w-[60px]">
+                <div className="flex gap-3">
+                  <span className="text-wedding-pink font-medium min-w-[50px]">
                     지하철
                   </span>
-                  <span className="text-summer-text/80">{transport.subway}</span>
-                </motion.div>
+                  <span className="text-wedding-text-muted">{transport.subway}</span>
+                </div>
               )}
               {transport.bus && (
-                <motion.div variants={itemVariants} className="flex gap-3">
-                  <span className="text-summer-primary font-medium min-w-[60px]">
+                <div className="flex gap-3">
+                  <span className="text-wedding-pink font-medium min-w-[50px]">
                     버스
                   </span>
-                  <span className="text-summer-text/80">{transport.bus}</span>
-                </motion.div>
+                  <span className="text-wedding-text-muted">{transport.bus}</span>
+                </div>
               )}
               {transport.car && (
-                <motion.div variants={itemVariants} className="flex gap-3">
-                  <span className="text-summer-primary font-medium min-w-[60px]">
+                <div className="flex gap-3">
+                  <span className="text-wedding-pink font-medium min-w-[50px]">
                     자가용
                   </span>
-                  <span className="text-summer-text/80">{transport.car}</span>
-                </motion.div>
+                  <span className="text-wedding-text-muted">{transport.car}</span>
+                </div>
               )}
             </div>
-          </GlassCard>
+          </motion.div>
         )}
       </div>
     </Section>
