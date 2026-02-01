@@ -3,8 +3,6 @@
 import { motion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
 import { LiquidGlass } from '@/components/ui/LiquidGlass';
-import { type AccountInfo } from '@/types/wedding';
-import { useState } from 'react';
 
 interface ContactInfo {
   name: string;
@@ -13,8 +11,6 @@ interface ContactInfo {
 }
 
 interface AccountSectionProps {
-  groomAccounts?: AccountInfo[];
-  brideAccounts?: AccountInfo[];
   groomName: string;
   brideName: string;
   groomContact: ContactInfo;
@@ -41,7 +37,7 @@ function ContactItem({ contact }: { contact: ContactInfo }) {
         <div className="flex items-center gap-1">
           <motion.button
             onClick={() => handleCall(contact.phone!)}
-            className="text-wedding-text/70 flex h-8 w-8 items-center justify-center rounded-full outline-none select-none"
+            className="text-wedding-text/80 flex h-8 w-8 items-center justify-center rounded-full outline-none select-none"
             style={{ WebkitTapHighlightColor: 'transparent' }}
             whileTap={{ scale: 0.9, opacity: 0.7 }}
             transition={{ duration: 0.1 }}
@@ -58,7 +54,7 @@ function ContactItem({ contact }: { contact: ContactInfo }) {
           </motion.button>
           <motion.button
             onClick={() => handleSms(contact.phone!)}
-            className="text-wedding-text/70 flex h-8 w-8 items-center justify-center rounded-full outline-none select-none"
+            className="text-wedding-text/80 flex h-8 w-8 items-center justify-center rounded-full outline-none select-none"
             style={{ WebkitTapHighlightColor: 'transparent' }}
             whileTap={{ scale: 0.9, opacity: 0.7 }}
             transition={{ duration: 0.1 }}
@@ -79,33 +75,6 @@ function ContactItem({ contact }: { contact: ContactInfo }) {
   );
 }
 
-function AccountItem({
-  account,
-  onCopy,
-  copied,
-}: {
-  account: AccountInfo;
-  onCopy: () => void;
-  copied: boolean;
-}) {
-  return (
-    <div className="flex items-center justify-between py-3">
-      <div>
-        <p className="text-wedding-text-muted text-xs">
-          {account.bank} · {account.holder}
-        </p>
-        <p className="text-wedding-text mt-0.5 text-sm font-medium">{account.accountNumber}</p>
-      </div>
-      <button
-        onClick={onCopy}
-        className="bg-wedding-pink/20 text-wedding-text rounded-full px-3 py-1.5 text-xs font-medium"
-      >
-        {copied ? '복사됨' : '복사'}
-      </button>
-    </div>
-  );
-}
-
 function GlassButton({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) {
   return (
     <motion.div
@@ -113,10 +82,10 @@ function GlassButton({ children, onClick }: { children: React.ReactNode; onClick
       transition={{ duration: 0.1 }}
       style={{ WebkitTapHighlightColor: 'transparent' }}
     >
-      <LiquidGlass borderRadius={50} scale={30} blur={2}>
+      <LiquidGlass borderRadius={50} className="block" scale={30} blur={2}>
         <button
           onClick={onClick}
-          className="text-wedding-text flex w-full items-center justify-center gap-2 px-6 py-3 text-sm font-medium outline-none select-none"
+          className="text-wedding-text bg-wedding-pink/25 border-wedding-pink/30 w-full rounded-full border px-6 py-3 text-sm font-semibold outline-none select-none"
         >
           {children}
         </button>
@@ -126,14 +95,27 @@ function GlassButton({ children, onClick }: { children: React.ReactNode; onClick
 }
 
 export function AccountSection({
-  groomAccounts = [],
-  brideAccounts = [],
   groomName,
   brideName,
   groomContact,
   brideContact,
 }: AccountSectionProps) {
-  const [activeTab, setActiveTab] = useState<'groom' | 'bride'>('groom');
+  const copyToClipboard = async () => {
+    const url = window.location.href;
+
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = url;
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      textarea.style.top = '0';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    } catch {}
+  };
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -143,21 +125,14 @@ export function AccountSection({
           text: '두 사람의 새로운 시작에 함께해 주세요',
           url: window.location.href,
         });
-      } catch (error) {
-        alert(error);
-        // User cancelled
+      } catch {
+        // User cancelled or share failed - fallback to clipboard
+        await copyToClipboard();
       }
     } else {
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        alert('링크가 복사되었습니다.');
-      } catch {
-        alert('공유에 실패했습니다.');
-      }
+      await copyToClipboard();
     }
   };
-
-  const currentAccounts = activeTab === 'groom' ? groomAccounts : brideAccounts;
 
   return (
     <Section id="account" className="flex items-center justify-center">
@@ -181,32 +156,12 @@ export function AccountSection({
           <LiquidGlass scale={30} blur={2}>
             <div className="px-5 py-3">
               <motion.div
-                key={activeTab}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.2 }}
               >
                 <ContactItem contact={groomContact} />
                 <ContactItem contact={brideContact} />
-
-                {/* 구분선 */}
-                {/* {currentContacts.length > 0 && currentAccounts.length > 0 && (
-                  <div className="bg-wedding-pink/20 my-4 h-px" />
-                )} */}
-
-                {/* 계좌 */}
-                {currentAccounts.length > 0 && (
-                  <div className="divide-wedding-pink">
-                    {/* {currentAccounts.map((account, idx) => (
-                      <AccountItem
-                        key={idx}
-                        account={account}
-                        onCopy={() => handleCopy(account.accountNumber, `${activeTab}-${idx}`)}
-                        copied={copiedIndex === `${activeTab}-${idx}`}
-                      />
-                    ))} */}
-                  </div>
-                )}
               </motion.div>
             </div>
           </LiquidGlass>
@@ -231,10 +186,8 @@ export function AccountSection({
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <p className="text-wedding-pink mb-2 text-xs tracking-widest">THANK YOU</p>
-          <p className="text-wedding-text-muted text-sm">
-            {groomName} & {brideName}
-          </p>
+          <p className="text-wedding-pink mb-2 text-base tracking-widest">THANK YOU</p>
+          <p className="text-wedding-text/40 text-xs">Designed by Karam</p>
         </motion.footer>
       </div>
     </Section>

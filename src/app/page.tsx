@@ -65,8 +65,6 @@ export default function Home() {
 
         {/* 마음 전하기 */}
         <AccountSection
-          groomAccounts={weddingInfo.accounts?.groom}
-          brideAccounts={weddingInfo.accounts?.bride}
           groomName={weddingInfo.groom.name}
           brideName={weddingInfo.bride.name}
           groomContact={{
