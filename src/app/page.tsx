@@ -54,19 +54,25 @@ export default function Home() {
 
         <SectionDivider />
 
-        {/* 갤러리 */}
-        <GallerySection
-          images={weddingInfo.gallery}
-          groomName={weddingInfo.groom.name}
-          brideName={weddingInfo.bride.name}
-        />
-
-        <SectionDivider />
-
         {/* 마음 전하기 */}
         <AccountSection
           groomAccounts={weddingInfo.accounts?.groom}
           brideAccounts={weddingInfo.accounts?.bride}
+          groomName={weddingInfo.groom.name}
+          brideName={weddingInfo.bride.name}
+          groomContacts={[
+            { name: weddingInfo.groom.name, phone: weddingInfo.groom.phone, relation: '신랑' },
+          ]}
+          brideContacts={[
+            { name: weddingInfo.bride.name, phone: weddingInfo.bride.phone, relation: '신부' },
+          ]}
+        />
+
+        <SectionDivider />
+
+        {/* 갤러리 */}
+        <GallerySection
+          images={weddingInfo.gallery}
           groomName={weddingInfo.groom.name}
           brideName={weddingInfo.bride.name}
         />

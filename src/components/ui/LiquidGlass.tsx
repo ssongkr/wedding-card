@@ -57,13 +57,26 @@ export function LiquidGlass({
           ...style,
         }}
       >
+        {/* 배경 블러 레이어 (빈 공간 방지) */}
+        <div
+          className="liquid-glass-bg"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 0,
+            backdropFilter: `blur(${blur}px)`,
+            WebkitBackdropFilter: `blur(${blur}px)`,
+            borderRadius: 'inherit',
+          }}
+        />
+
         {/* 굴절 효과 레이어 */}
         <div
           className="liquid-glass-morph"
           style={{
             position: 'absolute',
-            inset: 0,
-            zIndex: 0,
+            inset: `-${scale}px`,
+            zIndex: 1,
             backdropFilter: `blur(${blur}px)`,
             WebkitBackdropFilter: `blur(${blur}px)`,
             filter: `url(#${filterId})`,
@@ -77,7 +90,7 @@ export function LiquidGlass({
           style={{
             position: 'absolute',
             inset: 0,
-            zIndex: 1,
+            zIndex: 2,
             boxShadow: '0 4px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(0, 0, 0, 0.08)',
             borderRadius: 'inherit',
             pointerEvents: 'none',
@@ -90,7 +103,7 @@ export function LiquidGlass({
           style={{
             position: 'absolute',
             inset: 0,
-            zIndex: 2,
+            zIndex: 3,
             boxShadow:
               'inset 2px 2px 6px 0 rgba(255, 255, 255, 0.6), inset 0px 0px 12px 0 rgba(232, 180, 184, 0.25), inset 0 0 0 1px rgba(232, 180, 184, 0.3)',
             borderRadius: 'inherit',
@@ -103,7 +116,7 @@ export function LiquidGlass({
           className="liquid-glass-content"
           style={{
             position: 'relative',
-            zIndex: 3,
+            zIndex: 4,
             borderRadius: 'inherit',
           }}
         >

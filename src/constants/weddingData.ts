@@ -45,23 +45,29 @@ export const weddingInfo: WeddingInfo = {
   accounts: {
     groom: [
       {
-        bank: '신한은행',
-        accountNumber: '110-123-456789',
-        holder: '신랑',
+        bank: '카카오뱅크',
+        accountNumber: '3333-01-9349837',
+        holder: '송가람',
         relation: '신랑',
       },
       {
         bank: '국민은행',
-        accountNumber: '123-45-6789012',
+        accountNumber: '0000-00-0000000',
         holder: '아버지',
         relation: '신랑 부',
+      },
+      {
+        bank: '우리은행',
+        accountNumber: '0000-00-0000000',
+        holder: '어머니',
+        relation: '신랑 모',
       },
     ],
     bride: [
       {
-        bank: '우리은행',
-        accountNumber: '1002-123-456789',
-        holder: '신부',
+        bank: '카카오뱅크',
+        accountNumber: '0000-000-0000000',
+        holder: '김진경',
         relation: '신부',
       },
       {
@@ -69,6 +75,12 @@ export const weddingInfo: WeddingInfo = {
         accountNumber: '123-456789-01234',
         holder: '어머니',
         relation: '신부 모',
+      },
+      {
+        bank: '신한은행',
+        accountNumber: '987-654321-09876',
+        holder: '아버지',
+        relation: '신부 부',
       },
     ],
   },
