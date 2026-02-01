@@ -25,14 +25,20 @@ interface VenueSectionProps {
 
 function GlassButton({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) {
   return (
-    <LiquidGlass borderRadius={50} className="block" scale={30} blur={2}>
-      <button
-        onClick={onClick}
-        className="text-wedding-text bg-wedding-pink/25 border-wedding-pink/30 w-full rounded-full border px-6 py-3 text-sm font-semibold"
-      >
-        {children}
-      </button>
-    </LiquidGlass>
+    <motion.div
+      whileTap={{ scale: 0.97, filter: 'brightness(0.95)' }}
+      transition={{ duration: 0.1 }}
+      style={{ WebkitTapHighlightColor: 'transparent' }}
+    >
+      <LiquidGlass borderRadius={50} className="block" scale={30} blur={2}>
+        <button
+          onClick={onClick}
+          className="text-wedding-text bg-wedding-pink/25 border-wedding-pink/30 w-full rounded-full border px-6 py-3 text-sm font-semibold outline-none select-none"
+        >
+          {children}
+        </button>
+      </LiquidGlass>
+    </motion.div>
   );
 }
 

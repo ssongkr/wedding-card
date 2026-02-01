@@ -39,9 +39,12 @@ function ContactItem({ contact }: { contact: ContactInfo }) {
       </div>
       {contact.phone && (
         <div className="flex items-center gap-1">
-          <button
+          <motion.button
             onClick={() => handleCall(contact.phone!)}
-            className="text-wedding-text/70 hover:bg-wedding-pink/10 flex h-8 w-8 items-center justify-center rounded-full transition-colors"
+            className="text-wedding-text/70 flex h-8 w-8 items-center justify-center rounded-full outline-none select-none"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+            whileTap={{ scale: 0.9, opacity: 0.7 }}
+            transition={{ duration: 0.1 }}
             aria-label="전화하기"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,10 +55,13 @@ function ContactItem({ contact }: { contact: ContactInfo }) {
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               />
             </svg>
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => handleSms(contact.phone!)}
-            className="text-wedding-text/70 hover:bg-wedding-pink/10 flex h-8 w-8 items-center justify-center rounded-full transition-colors"
+            className="text-wedding-text/70 flex h-8 w-8 items-center justify-center rounded-full outline-none select-none"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+            whileTap={{ scale: 0.9, opacity: 0.7 }}
+            transition={{ duration: 0.1 }}
             aria-label="문자하기"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +72,7 @@ function ContactItem({ contact }: { contact: ContactInfo }) {
                 d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
               />
             </svg>
-          </button>
+          </motion.button>
         </div>
       )}
     </div>
@@ -102,14 +108,20 @@ function AccountItem({
 
 function GlassButton({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) {
   return (
-    <LiquidGlass borderRadius={50} scale={30} blur={2}>
-      <button
-        onClick={onClick}
-        className="text-wedding-text flex w-full items-center justify-center gap-2 px-6 py-3 text-sm font-medium"
-      >
-        {children}
-      </button>
-    </LiquidGlass>
+    <motion.div
+      whileTap={{ scale: 0.97, filter: 'brightness(0.95)' }}
+      transition={{ duration: 0.1 }}
+      style={{ WebkitTapHighlightColor: 'transparent' }}
+    >
+      <LiquidGlass borderRadius={50} scale={30} blur={2}>
+        <button
+          onClick={onClick}
+          className="text-wedding-text flex w-full items-center justify-center gap-2 px-6 py-3 text-sm font-medium outline-none select-none"
+        >
+          {children}
+        </button>
+      </LiquidGlass>
+    </motion.div>
   );
 }
 
@@ -131,7 +143,8 @@ export function AccountSection({
           text: '두 사람의 새로운 시작에 함께해 주세요',
           url: window.location.href,
         });
-      } catch {
+      } catch (error) {
+        alert(error);
         // User cancelled
       }
     } else {
@@ -207,17 +220,7 @@ export function AccountSection({
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
         >
-          <GlassButton onClick={handleShare}>
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-              />
-            </svg>
-            청첩장 공유하기
-          </GlassButton>
+          <GlassButton onClick={handleShare}>청첩장 공유하기</GlassButton>
         </motion.div>
 
         {/* 푸터 */}
