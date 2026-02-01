@@ -31,16 +31,17 @@ function ContactItem({ contact }: { contact: ContactInfo }) {
   };
 
   return (
-    <div className="flex items-center justify-between py-3">
-      <div>
-        <p className="text-wedding-text text-sm font-medium">{contact.name}</p>
-        <p className="text-wedding-text-muted text-xs">{contact.relation}</p>
+    <div className="flex items-center justify-between py-2.5">
+      <div className="flex items-center gap-1.5">
+        <span className="text-wedding-pink text-sm font-medium">{contact.relation}</span>
+        <span className="bg-wedding-pink/50 h-[2px] w-[2px] rounded-full" />
+        <span className="text-wedding-text text-sm font-medium">{contact.name}</span>
       </div>
       {contact.phone && (
-        <div className="flex gap-2">
+        <div className="flex items-center gap-1">
           <button
             onClick={() => handleCall(contact.phone!)}
-            className="bg-wedding-pink/20 text-wedding-text flex h-10 w-10 items-center justify-center rounded-full"
+            className="text-wedding-text/70 hover:bg-wedding-pink/10 flex h-8 w-8 items-center justify-center rounded-full transition-colors"
             aria-label="전화하기"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,7 +55,7 @@ function ContactItem({ contact }: { contact: ContactInfo }) {
           </button>
           <button
             onClick={() => handleSms(contact.phone!)}
-            className="bg-wedding-pink/20 text-wedding-text flex h-10 w-10 items-center justify-center rounded-full"
+            className="text-wedding-text/70 hover:bg-wedding-pink/10 flex h-8 w-8 items-center justify-center rounded-full transition-colors"
             aria-label="문자하기"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
