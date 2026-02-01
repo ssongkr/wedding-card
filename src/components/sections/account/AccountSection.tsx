@@ -93,11 +93,11 @@ export function AccountSection({
     <Section id="account" className="flex items-center justify-center">
       <div className="mx-auto w-full max-w-md">
         <motion.h2
-          className="text-wedding-text mb-10 text-center text-2xl"
+          className="text-wedding-text mb-10 text-center text-3xl font-medium"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           마음 전하실 곳
         </motion.h2>
