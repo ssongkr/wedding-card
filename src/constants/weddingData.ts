@@ -75,6 +75,7 @@ export const weddingInfo: WeddingInfo = {
 };
 
 export const transportInfo = {
-  subway: '정자역 3번 출구에서 2번 버스 (도보 15분)',
-  car: '네이버 그린팩토리 지하 주차장 (무료)',
+  subway: '정자역 3번 출구 2번 버스 탑승 (도보 15분)',
+  car: '그린팩토리 지하 주차장 (무료)',
+  bus: '',
 };

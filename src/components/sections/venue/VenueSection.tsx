@@ -40,6 +40,7 @@ export function VenueSection({
   date,
   time,
   venueName,
+  venueHall,
   venueRoadAddress,
   lat,
   lng,
@@ -63,7 +64,7 @@ export function VenueSection({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           예식 안내
         </motion.h2>
@@ -73,7 +74,7 @@ export function VenueSection({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
         >
           <div className="space-y-4 text-center">
             <div>
@@ -83,22 +84,22 @@ export function VenueSection({
                 {time}
               </p>
             </div>
-            <div className="bg-wedding-pink/30 mx-auto h-4 w-[2px] rounded-full" />
+            <div className="bg-wedding-pink/30 mx-auto h-3 w-[2px] rounded-full" />
             <div>
               <p className="text-wedding-text mb-3 text-lg">
                 {venueName}
                 <br />
-                커넥트홀 2층
+                {venueHall}
               </p>
               <p className="text-wedding-text-muted mt-1 text-sm">{venueRoadAddress}</p>
             </div>
-            <div className="bg-wedding-pink/30 mx-auto h-4 w-[2px] rounded-full" />
+            <div className="bg-wedding-pink/30 mx-auto h-3 w-[2px] rounded-full" />
             <motion.div
               className="mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
             >
               <div className="border-wedding-pink/50 overflow-hidden rounded-xl border-1">
                 <NaverMap lat={lat} lng={lng} className="h-64 w-full" />
@@ -112,7 +113,7 @@ export function VenueSection({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
         >
           <GlassButton onClick={handleOpenKakaoMap}>카카오맵</GlassButton>
           <GlassButton onClick={handleOpenNaverMap}>네이버지도</GlassButton>
@@ -124,18 +125,18 @@ export function VenueSection({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
           >
             <LiquidGlass className="mt-6" scale={30} blur={2}>
               <div className="px-5 py-6">
                 <div className="space-y-3 text-sm font-medium">
                   <div className="flex gap-3">
-                    <span className="text-wedding-text min-w-[50px] shrink-0">대중교통</span>
-                    <span className="text-wedding-text-muted font-normal">{transport.subway}</span>
+                    <span className="text-wedding-text min-w-[50px] shrink-0"> 주차장</span>
+                    <span className="text-wedding-text-muted font-normal">{transport.car}</span>
                   </div>
                   <div className="flex gap-3">
-                    <span className="text-wedding-text min-w-[50px] shrink-0">자가용</span>
-                    <span className="text-wedding-text-muted">{transport.car}</span>
+                    <span className="text-wedding-text min-w-[50px] shrink-0">대중교통</span>
+                    <span className="text-wedding-text-muted font-normal">{transport.subway}</span>
                   </div>
                 </div>
               </div>
