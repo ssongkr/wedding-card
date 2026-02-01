@@ -70,7 +70,7 @@ export default function Home() {
             birthOrder: '차녀',
             childhoodPhoto: '/images/3.jpg',
           }}
-          galleryImages={weddingInfo.gallery?.slice(0, 6)}
+          galleryImages={weddingInfo.gallery?.slice(0, 3)}
         />
 
         <SectionDivider />

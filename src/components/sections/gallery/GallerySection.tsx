@@ -35,8 +35,8 @@ export function GallerySection({ groom, bride, galleryImages = [] }: GallerySect
         {groom.childhoodPhoto && (
           <motion.div
             className="flex items-center justify-center gap-5"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20, rotate: 0 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
           >
@@ -46,32 +46,54 @@ export function GallerySection({ groom, bride, galleryImages = [] }: GallerySect
               </p>
               <p className="text-wedding-text mt-1 text-sm font-medium">{groom.name}</p>
             </div>
-            <div className="border-wedding-pink/30 h-20 w-20 shrink-0 overflow-hidden rounded-full border">
-              <img
-                src={groom.childhoodPhoto}
-                alt={`${groom.name} 어릴적`}
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <motion.div
+              className="shrink-0 rounded-sm bg-[#fffaf8] p-1.5 pb-3"
+              style={{
+                boxShadow: '0 3px 10px rgba(180, 140, 140, 0.2), 0 1px 3px rgba(0, 0, 0, 0.06)',
+              }}
+              initial={{ rotate: 0 }}
+              whileInView={{ rotate: 2 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="h-20 w-20 overflow-hidden">
+                <img
+                  src={groom.childhoodPhoto}
+                  alt={`${groom.name} 어릴적`}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </motion.div>
           </motion.div>
         )}
 
         {/* 신부 소개 - 사진 왼쪽, 설명 오른쪽 */}
         {bride.childhoodPhoto && (
           <motion.div
-            className="mt-4 flex items-center justify-center gap-5"
+            className="mt-6 flex items-center justify-center gap-5"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
           >
-            <div className="border-wedding-pink/30 h-20 w-20 shrink-0 overflow-hidden rounded-full border">
-              <img
-                src={bride.childhoodPhoto}
-                alt={`${bride.name} 어릴적`}
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <motion.div
+              className="shrink-0 rounded-sm bg-[#fffaf8] p-1.5 pb-3"
+              style={{
+                boxShadow: '0 3px 10px rgba(180, 140, 140, 0.2), 0 1px 3px rgba(0, 0, 0, 0.06)',
+              }}
+              initial={{ rotate: 0 }}
+              whileInView={{ rotate: -2 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <div className="h-20 w-20 overflow-hidden">
+                <img
+                  src={bride.childhoodPhoto}
+                  alt={`${bride.name} 어릴적`}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </motion.div>
             <div className="text-left">
               <p className="text-wedding-text/60 text-xs">
                 {bride.fatherName} · {bride.motherName}의 {bride.birthOrder}
@@ -80,6 +102,8 @@ export function GallerySection({ groom, bride, galleryImages = [] }: GallerySect
             </div>
           </motion.div>
         )}
+
+        <div className="bg-wedding-pink/30 mx-auto mt-10 h-3 w-[2px] rounded-full" />
 
         {/* 갤러리 - 폴라로이드 스타일 */}
         {galleryImages.length > 0 && (
@@ -102,9 +126,11 @@ export function GallerySection({ groom, bride, galleryImages = [] }: GallerySect
                   }}
                 >
                   <div
-                    className={`rounded-sm bg-white p-2 pb-4 shadow-md ${
-                      isLarge ? 'w-3/4' : 'w-full'
-                    }`}
+                    className={`rounded-sm bg-[#fffaf8] p-2 pb-4 ${isLarge ? 'w-3/4' : 'w-full'}`}
+                    style={{
+                      boxShadow:
+                        '0 4px 12px rgba(180, 140, 140, 0.25), 0 2px 4px rgba(0, 0, 0, 0.08)',
+                    }}
                   >
                     <div className={isLarge ? 'aspect-[4/3]' : 'aspect-square'}>
                       <img
