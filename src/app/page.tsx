@@ -89,6 +89,8 @@ export default function Home() {
             phone: weddingInfo.bride.phone,
             relation: '신부',
           }}
+          groomAccounts={weddingInfo.accounts?.groom}
+          brideAccounts={weddingInfo.accounts?.bride}
         />
       </div>
     </main>
