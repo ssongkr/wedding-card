@@ -136,23 +136,23 @@ function AccountBottomSheet({
   };
 
   const renderAccount = (account: AccountInfo, key: string) => (
-    <div key={key} className="flex items-center justify-between py-3">
+    <div key={key} className="flex items-center justify-between py-3.5">
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-1.5">
-          <span className="text-wedding-pink text-[13px] font-medium">{account.relation}</span>
+          <span className="text-wedding-pink text-[14px] font-medium">{account.relation}</span>
           <span className="bg-wedding-pink/50 h-[2px] w-[2px] rounded-full" />
-          <span className="text-wedding-text text-[13px] font-medium">{account.holder}</span>
+          <span className="text-wedding-text text-[14px] font-medium">{account.holder}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="text-wedding-text/50 text-[12px]">{account.bank}</span>
-          <span className="text-wedding-text/70 text-[13px] tracking-wide">
+          <span className="text-wedding-text/50 text-[13px]">{account.bank}</span>
+          <span className="text-wedding-text/70 text-[14px] tracking-wide">
             {account.accountNumber}
           </span>
         </div>
       </div>
       <motion.button
         onClick={() => handleCopy(`${account.bank} ${account.accountNumber}`, key)}
-        className="text-wedding-text/60 flex h-9 w-9 items-center justify-center rounded-full outline-none select-none"
+        className="text-wedding-text/60 flex h-10 w-10 items-center justify-center rounded-full outline-none select-none"
         style={{ WebkitTapHighlightColor: 'transparent' }}
         whileTap={{ scale: 0.9, opacity: 0.7 }}
         transition={{ duration: 0.1 }}
@@ -160,7 +160,7 @@ function AccountBottomSheet({
       >
         {copiedKey === key ? (
           <svg
-            className="text-wedding-pink h-[18px] w-[18px]"
+            className="text-wedding-pink h-5 w-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -168,7 +168,7 @@ function AccountBottomSheet({
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         ) : (
-          <svg className="h-[18px] w-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -214,11 +214,11 @@ function AccountBottomSheet({
               <div className="bg-wedding-text/15 h-1 w-9 rounded-full" />
             </div>
 
-            <p className="text-wedding-text mb-5 text-center text-[15px] font-semibold">
+            <p className="text-wedding-text mb-3 text-[16px] font-semibold">
               계좌번호 안내
             </p>
 
-            <div className="divide-wedding-pink/15 divide-y">
+            <div>
               {groomAccounts?.map((account, idx) => renderAccount(account, `groom-${idx}`))}
               {brideAccounts?.map((account, idx) => renderAccount(account, `bride-${idx}`))}
             </div>
