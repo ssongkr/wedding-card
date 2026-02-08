@@ -23,17 +23,31 @@ interface VenueSectionProps {
   };
 }
 
-function GlassButton({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) {
+function GlassButton({
+  children,
+  onClick,
+  variant = 'primary',
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+  variant?: 'primary' | 'secondary';
+}) {
+  const isPrimary = variant === 'primary';
+
   return (
     <motion.div
       whileTap={{ scale: 0.97, filter: 'brightness(0.95)' }}
       transition={{ duration: 0.1 }}
       style={{ WebkitTapHighlightColor: 'transparent' }}
     >
-      <LiquidGlass borderRadius={50} className="block" scale={30} blur={2}>
+      <LiquidGlass borderRadius={16} className="block" scale={30} blur={2}>
         <button
           onClick={onClick}
-          className="text-wedding-text bg-wedding-pink/25 border-wedding-pink/30 w-full rounded-full border px-6 py-3 text-sm font-semibold outline-none select-none"
+          className={`w-full rounded-2xl border px-6 py-3 text-sm font-semibold outline-none select-none ${
+            isPrimary
+              ? 'text-wedding-text bg-wedding-pink/25 border-wedding-pink/30'
+              : 'text-wedding-text bg-wedding-pink/8 border-wedding-pink/15'
+          }`}
         >
           {children}
         </button>
@@ -60,6 +74,20 @@ export function VenueSection({
   const handleOpenKakaoMap = () => {
     const kakaoMapUrl = `https://map.kakao.com/link/map/${encodeURIComponent(venueName)},${lat},${lng}`;
     window.open(kakaoMapUrl, '_blank');
+  };
+
+  const handleOpenTmap = () => {
+    const tmapUrl = `tmap://route?goalname=${encodeURIComponent(venueName)}&goalx=${lng}&goaly=${lat}`;
+    const webFallback = `https://tmap.life/navigate?name=${encodeURIComponent(venueName)}&lon=${lng}&lat=${lat}`;
+
+    const start = Date.now();
+    window.location.href = tmapUrl;
+
+    setTimeout(() => {
+      if (Date.now() - start < 2000) {
+        window.open(webFallback, '_blank');
+      }
+    }, 1500);
   };
 
   return (
@@ -114,34 +142,23 @@ export function VenueSection({
           </div>
         </motion.div>
 
-        <motion.div
-          className="grid grid-cols-2 gap-3"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-        >
-          <GlassButton onClick={handleOpenKakaoMap}>카카오맵</GlassButton>
-          <GlassButton onClick={handleOpenNaverMap}>네이버지도</GlassButton>
-        </motion.div>
-
         {/* 교통 안내 - 리퀴드 글래스 */}
         {transport && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+            transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
           >
             <LiquidGlass className="mt-6" scale={30} blur={2}>
               <div className="px-5 py-6">
                 <div className="space-y-3 text-sm font-medium">
                   <div className="flex gap-3">
-                    <span className="text-wedding-text min-w-[50px] shrink-0"> 주차장</span>
+                    <span className="text-wedding-text min-w-[55px] shrink-0"> 주차장</span>
                     <span className="text-wedding-text-muted font-normal">{transport.car}</span>
                   </div>
                   <div className="flex gap-3">
-                    <span className="text-wedding-text min-w-[50px] shrink-0">대중교통</span>
+                    <span className="text-wedding-text min-w-[55px] shrink-0">대중교통</span>
                     <span className="text-wedding-text-muted font-normal">{transport.subway}</span>
                   </div>
                 </div>
@@ -149,6 +166,20 @@ export function VenueSection({
             </LiquidGlass>
           </motion.div>
         )}
+
+        <motion.div
+          className="mt-6 grid grid-cols-2 gap-3"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+        >
+          <div className="col-span-2">
+            <GlassButton onClick={handleOpenNaverMap}>네이버지도</GlassButton>
+          </div>
+          <GlassButton variant="secondary" onClick={handleOpenKakaoMap}>카카오맵</GlassButton>
+          <GlassButton variant="secondary" onClick={handleOpenTmap}>티맵</GlassButton>
+        </motion.div>
       </div>
     </Section>
   );

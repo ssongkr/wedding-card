@@ -244,10 +244,10 @@ function GlassButton({
       transition={{ duration: 0.1 }}
       style={{ WebkitTapHighlightColor: 'transparent' }}
     >
-      <LiquidGlass borderRadius={50} className="block" scale={30} blur={2}>
+      <LiquidGlass borderRadius={16} className="block" scale={30} blur={2}>
         <button
           onClick={onClick}
-          className={`w-full rounded-full border px-6 py-3 text-sm font-semibold outline-none select-none ${
+          className={`w-full rounded-2xl border px-6 py-3 text-sm font-semibold outline-none select-none ${
             isPrimary
               ? 'text-wedding-text bg-wedding-pink/25 border-wedding-pink/30'
               : 'text-wedding-text bg-wedding-pink/8 border-wedding-pink/15'
